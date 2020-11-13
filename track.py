@@ -31,7 +31,14 @@ def bbox_rel(image_width, image_height,  *xyxy):
     y_c = (bbox_top + bbox_h / 2)
     w = bbox_w
     h = bbox_h
-    return x_c, y_c, w, h
+    
+    # d = Distance Meaasurement for each bounding box
+    # item() is used to retrieve the value from the tensor
+    d = (2 * 3.14 * 180) / (w.item()+ h.item() * 360) * 1000 + 3 ### Distance measured in Inches 
+    feedback = ("{}".format(labels["Current Object"])+ " " +"is"+" at {} ".format(round(distance))+"Inches")
+    print(feedback)
+    
+    return x_c, y_c, w, h, d
 
 
 def compute_color_for_labels(label):
